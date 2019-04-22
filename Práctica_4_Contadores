@@ -1,0 +1,36 @@
+#include <18F4620.h>
+#include <stdio.h>
+#include <stdlib.h>
+#fuses HS, NOFCMEN, NOIESO, PUT, NOBROWNOUT, NOWDT, NOMCLR
+#fuses NOPBADEN, STVREN, NOLVP, NODEBUG
+#use delay(clock=16M)
+#int_timer0
+void timer0(){ // En este apartado va el código que hará la interrupción
+int16 contador = 1;
+while(1){
+ output_b(contador);
+ contador *=2;
+ if(contador==128)
+ contador=1;
+ SET_TIMER0(131);
+ }
+
+}
+
+void main(){
+setup_oscillator(OSC_16MHZ);
+set_tris_a(0x20); //Del puerto A sólo los primeros 6 pines
+set_tris_b(0x00); //Establecemos los puertos A,B,C y D en salida.
+set_tris_c(0x00);
+set_tris_d(0x00);
+
+setup_timer_0(RTCC_INTERNAL |RTCC_DIV_16 );
+SET_TIMER0(131);
+enable_interrupts(INT_TIMER0); //SE HABILITA LA INTERRUPCIÓN NECESARIA
+enable_interrupts(GLOBAL); // SE HABILITAN LAS INTERRUPCIONES GLOBALES
+
+while(1){
+
+}
+}
+
