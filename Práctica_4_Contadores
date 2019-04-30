@@ -10,10 +10,44 @@ int contadorglobal=1, AnilloA = 1, AnilloB = 1, AnilloC =1, AnilloD =1;
 #INT_TIMER0
 void TIMER0(){ // En este apartado va el código que hará la interrupción
     
+   while(1){
+    if(contadorglobal%1==0){
+    output_a(AnilloA);
+    AnilloA*=2;
+    if(AnilloA==256)
+    AnilloA=1;
+    }
+    
+    if(contadorglobal%5==0){
+    output_b(AnilloB);
+    AnilloB*=2;
+    if(AnilloB==256)
+    AnilloB=1;
+    }
+    
+    if(contadorglobal%7==0){
+    output_c(AnilloC);
+    AnilloC*=2;
+    if(AnilloC==256)
+    AnilloC=1;
+    }
+    
+    if(contadorglobal%10==0){
+    output_d(AnilloD);
+    AnilloD*=2;
+    if(AnilloD==256)
+    AnilloD=1;
+    
+    }
    
-    SET_TIMER0(15536);
-  
-   
+ //  if(contadorglobal==10){
+   // contadorglobal=1;
+    
+  // }
+   contadorglobal++;
+      SET_TIMER0(15536);
+   }
+
     }
      
     
@@ -30,48 +64,10 @@ enable_interrupts(INT_TIMER0);//SE HABILITA LA INTERRUPCIÓN NECESARIA
 enable_interrupts(GLOBAL); // SE HABILITAN LAS INTERRUPCIONES GLOBALES
 
 while(1){
-
-    contadorglobal=0;
-    AnilloA=0, AnilloB=0, AnilloC=0, AnilloD=0;
    
-    if(AnilloA==1){
-    output_a(AnilloA);
-    AnilloA*=2;
-    if(AnilloA==256)
-    AnilloA=1;
-    }
-    
-    if(AnilloB==1){
-    output_b(AnilloB);
-    AnilloB*=2;
-    if(AnilloB==256)
-    AnilloB=1;
-    }
-    
-    if(AnilloC==1){
-    output_c(AnilloC);
-    AnilloC*=2;
-    if(AnilloC==256);
-    AnilloC=1;
-    }
-    
-    if(AnilloD==1){
-    output_d(AnilloD);
-    AnilloD*=2;
-    if(AnilloD==256);
-    AnilloD=1;
-    
-    }
-   
-   if(contadorglobal==10){
-    contadorglobal=1;
-    timer0();
-   }
-   contadorglobal++;
    
  }
 
 
 
 }
-
